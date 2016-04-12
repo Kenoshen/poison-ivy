@@ -2,6 +2,8 @@ package com.poison.ivy.task
 
 import java.io.File
 
+import scala.concurrent.Future
+
 object Clean extends TaskGroup[Unit] {
   override lazy val description: String = "Try to find the build file for parsing"
 
