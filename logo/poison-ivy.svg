@@ -5,11 +5,35 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
    viewBox="0 0 566.92914 566.92913"
    height="160mm"
-   width="160mm">
+   width="160mm"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="poison-ivy.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="841"
+     inkscape:window-height="603"
+     id="namedview21"
+     showgrid="false"
+     inkscape:zoom="0.54364635"
+     inkscape:cx="251.55992"
+     inkscape:cy="203.40641"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
   <defs
      id="defs4" />
   <metadata
@@ -20,25 +44,25 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      transform="translate(-144.1489,185.91958)"
-     style="display:inline"
+     style="display:inline;fill:#ff2f2f;fill-opacity:1"
      id="layer3">
     <path
        id="path4239"
        d="m 327.00962,204.77136 -73.61189,-32.4172 84.8137,108.5976 c 0,0 -151.39803,-94.40504 -180.02909,-169.37983 -28.63108,-74.9748 11.12007,-202.770063 53.60866,-200.986628 42.48859,1.783434 59.74157,80.1815015 88.81436,118.322758 -23.73232,-29.50185749 -76.25662,-73.350279 -61.4002,-90.555684 38.22705,-40.702926 132.27609,-47.355786 193.74463,-15.483836 61.46854,31.871963 90.33317,58.333829 101.18168,67.7077325 13.88124,11.994403 26.6003,17.2831199 51.38023,4.309793 24.77993,-12.9733275 50.07049,-5.1999675 50.07049,-5.1999675 0,0 -32.99259,1.1385095 -46.1972,18.0097964 C 576.18039,24.56718 576.09002,23.82625 571.12752,45.29564 c -4.9625,21.46939 38.12942,15.92405 57.61832,8.19904 39.07164,-15.48721 79.74108,8.78151 79.74108,8.78151 0,0 -41.4754,-12.46349 -66.78284,11.18228 -26.1646,24.446666 -42.5902,19.530386 -59.93023,43.74362 -16.50638,23.04912 1.65767,33.6498 41.84729,20.26978 40.18963,-13.38002 76.21829,5.77707 76.21829,5.77707 0,0 -34.76547,-9.69709 -67.43218,14.81558 -32.66671,24.51266 -53.71735,15.06419 -63.75857,33.73996 -14.14085,26.3007 4.5428,24.6358 22.40991,19.07872 18.54414,-5.76764 42.69687,2.70651 42.69687,2.70651 0,0 -34.18059,-1.15431 -47.07443,14.00771 -21.08117,24.7896 -63.29129,34.72445 -73.24128,47.68134 -7.88637,10.26962 17.65433,13.70289 21.67426,5.99256 4.01993,-7.71033 26.89135,-3.62196 26.89135,-3.62196 0,0 -16.48083,-1.65581 -26.68571,13.29671 -13.38479,19.61183 -57.08508,6.07843 -75.36621,7.77804 -36.72975,3.41479 -123.1237,3.74602 -134.54408,-37.22266 -11.42037,-40.96869 23.20375,-9.72516 23.20375,-9.72516 z"
-       style="fill:#71cc5f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:#ff2f2f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
   <g
      transform="translate(-144.1489,185.91958)"
-     style="display:inline"
+     style="display:inline;fill:#a30000;fill-opacity:1"
      id="layer7">
     <path
-       style="display:inline;fill:#419630;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="display:inline;fill:#a30000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 708.48692,62.27619 c 0,0 -41.4754,-12.46349 -66.78284,11.18228 -26.1646,24.446666 -42.5902,19.530386 -59.93023,43.74362 -16.50638,23.04912 1.65767,33.6498 41.84729,20.26978 40.18963,-13.38002 76.21829,5.77707 76.21829,5.77707 0,0 -34.76547,-9.69709 -67.43218,14.81558 -32.66671,24.51266 -53.71735,15.06419 -63.75857,33.73996 -14.14085,26.3007 4.5428,24.6358 22.40991,19.07872 18.54414,-5.76764 42.69687,2.70651 42.69687,2.70651 0,0 -34.18059,-1.15431 -47.07443,14.00771 -21.08117,24.7896 -63.29129,34.72445 -73.24128,47.68134 -7.88637,10.26962 17.65433,13.70289 21.67426,5.99256 4.01993,-7.71033 26.89135,-3.62196 26.89135,-3.62196 0,0 -16.48083,-1.65581 -26.68571,13.29671 -13.38479,19.61183 -57.08508,6.07843 -75.36621,7.77804 -36.72975,3.41479 -123.1237,3.74602 -134.54408,-37.22266 -11.42037,-40.96869 23.20375,-9.72516 23.20375,-9.72516 C 383.62,143.1613 490.40665,82.92786 522.79813,93.766836 c 32.39148,10.838994 63.16751,2.2303 91.81101,-19.132376 28.4514,-21.21942 68.60684,-24.11973 93.87778,-12.35827 z"
        id="path4293" />
   </g>
@@ -66,11 +90,11 @@
     <path
        id="path4270"
        d="m 311.61094,242.02715 c 10.88548,2.67288 27.30225,1.67243 35.13041,8.35274 4.97971,-11.99134 17.43658,-5.40757 37.60438,-23.72179 0,0 -18.31377,35.90746 -35.6252,36.585 -17.31143,0.67754 -27.60359,-13.28028 -37.10959,-21.21595 z"
-       style="fill:#ff0202;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:#44ff02;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        id="path4268"
        d="m 311.50182,241.83265 c 0,0 16.01811,-1.96483 22.54275,-1.43387 6.52464,0.53096 6.55223,2.46577 9.26602,2.16252 2.71378,-0.30324 2.74727,-2.34208 8.1492,-4.85065 5.40193,-2.50858 33.27502,-12.24766 33.27502,-11.23159 0,0 -7.65374,11.93514 -34.03438,21.77955 -2.6149,3.37894 -5.28944,2.80714 -11.71449,1.70005 -16.02108,-1.8596 -27.48412,-8.12601 -27.48412,-8.12601 z"
-       style="fill:#b60000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:#079700;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
   <g
      transform="translate(-144.1489,185.91958)"
