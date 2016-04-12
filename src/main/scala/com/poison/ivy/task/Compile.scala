@@ -2,6 +2,8 @@ package com.poison.ivy.task
 
 import scala.concurrent.Future
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 object Compile extends TaskGroup[String] {
   override def description: String = "Compile all of the relevant source files"
 

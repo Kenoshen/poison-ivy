@@ -13,5 +13,6 @@ object Clean extends TaskGroup[Unit] {
       // TODO: MW delete the directory
       Future.successful()
     }
+    ???
   }
 }
