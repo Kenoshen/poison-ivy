@@ -1,0 +1,42 @@
+---
+
+variables:
+  play-version: 2.3.3
+
+defaults:
+  group: com.twc.groucho
+  version: $githash-$date
+  package: jar
+  publish:
+    type: mvn
+    credentials: $user-home/.credentials/twc.artifactory.eg
+    url: "http://eg-jenkins.analytics.cloud.twc.net:8081/artifactory/libs-release-local"
+  source: 1.8
+  target: 1.8
+  scala: 2.10
+
+libraries:
+  logback: "org.logback:logback:1.2.3"
+  json: "org.json:json:1.2.3"
+  junit: "org.junit:junit:1.2.3:test"
+  xml: "org.xml:xml:1.2.3"
+  play-json: "com.play:play-json::$play-version"
+  play-xml: "com.play:play-xml::$play-version"
+  play-yaml: "com.play:play-yaml::$play-version"
+  common: [logback, junit, json, xml]
+
+modules:
+  - name: groucho
+    path: groucho/
+    description: A cool web app that gives a detailed look at Event Gateway yay!
+    dependencies:
+      - groucho-model
+      - common
+      - play-json
+      - play-xml
+      - play-yaml
+    package: zip
+
+  - name: groucho-model
+    dependencies:
+      - common
