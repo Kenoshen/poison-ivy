@@ -2,7 +2,7 @@ package com.poison.ivy.task
 
 import scala.concurrent.Future
 
-object Compile extends Task[Unit, String] {
+object Compile extends TaskGroup[String] {
   override def description: String = "Compile all of the relevant source files"
 
   override def run(input: Unit): Future[String] = for {

@@ -5,7 +5,7 @@ import com.poison.ivy.docs.{Timeable, Describable}
 import scala.concurrent.Future
 
 /**
-  * The simplest form of action that poison ivy can take.  Some tasks will also call other tasks and chain tasks together.
+  * The simplest form of action that poison-ivy can take.  Some tasks will also call other tasks and chain tasks together.
   * @tparam INCOMING the input for the task
   * @tparam OUTGOING the output of the task
   */
