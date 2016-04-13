@@ -1,9 +1,13 @@
 package com.poison.ivy.build
 
+import java.util.Date
+
 import com.poison.ivy.task.TaskException
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
+
+import sys.process._
 
 @RunWith(classOf[JUnitRunner])
 class BuildVariablesTest extends FunSuite {
@@ -53,5 +57,14 @@ class BuildVariablesTest extends FunSuite {
     assert(variables.get("var1") == Option("1"))
     assert(variables.get("var2") == Option("2"))
     assert(variables.get("var3") == Option("1 2"))
+  }
+
+  test("validate global default variables"){
+    val variables = BuildVariables()
+
+    val githash = "git rev-parse --short HEAD"!!
+
+    assert(variables.get("githash") == Option(githash))
+    assert(variables.get("timestamp").map(_.toLong / 10000) == Option(System.currentTimeMillis() / 10000))
   }
 }

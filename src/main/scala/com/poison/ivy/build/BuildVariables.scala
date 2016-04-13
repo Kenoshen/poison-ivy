@@ -1,12 +1,20 @@
 package com.poison.ivy.build
 
+import java.io.{PrintStream, ByteArrayOutputStream}
+import java.text.SimpleDateFormat
+import java.util.Date
+
 import com.poison.ivy.task.TaskException
 import net.jcazevedo.moultingyaml.{YamlString, YamlObject}
+
+import sys.process._
 
 case class BuildVariables(variables: BuildVariable*){
   protected final val TEMPLATE_REGEX = """(\$\{(.*?)\})|(\$(.*?)[:"'|{}+=!@#$%^`~&*;,.<>?\/\\\[\]\(\)\n\s])|(\$(.*?)$)""".r
 
-  def get(variableName: String): Option[String] = variables.find(_.name == variableName).map(_.value)
+
+
+  def get(variableName: String): Option[String] = variables.find(_.name == variableName).orElse(BuildVariables.globalVariables.find(_.name == variableName)).map(_.value)
   def populateTemplateString(templateString: String): String = {
     val matches = TEMPLATE_REGEX.findAllMatchIn(templateString)
     var populated = templateString
@@ -36,6 +44,30 @@ case class BuildVariables(variables: BuildVariable*){
 }
 
 object BuildVariables {
+  protected final val globalVariables: Seq[BuildVariable] = {
+    val gitCommandNotFound = ("git --help"!!).contains("not found")
+    val githash = BuildVariable("githash", if (!gitCommandNotFound) "git rev-parse --short HEAD"!! else "")
+    val githashLong = BuildVariable("githash-long", if (!gitCommandNotFound) "git rev-parse HEAD"!! else "")
+
+    val date = new Date()
+    val defaultDate = BuildVariable("date", new SimpleDateFormat().format(date))
+    val shortDate = BuildVariable("date-short", new SimpleDateFormat("yyyy/MM/dd").format(date))
+    val longDate = BuildVariable("date-long", new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(date))
+    val millisDate = BuildVariable("date-millis", new SimpleDateFormat("S").format(date))
+
+    val epoch = BuildVariable("timestamp", s"${System.currentTimeMillis()}")
+
+    Seq(
+      githash,
+      githashLong,
+      defaultDate,
+      shortDate,
+      longDate,
+      millisDate,
+      epoch
+    )
+  }
+
   def apply(yaml: YamlObject): BuildVariables = BuildVariables(yaml.fields.map {
       case (key: YamlString, value: YamlString) => BuildVariable(key.value, value.value)
       case (key, value) => throw new TaskException(s"Expected (string: string), instead got ($key: $value)")
