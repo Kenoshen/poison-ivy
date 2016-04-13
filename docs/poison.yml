@@ -23,7 +23,8 @@ libraries:
   play-json: "com.play:play-json::$play-version"
   play-xml: "com.play:play-xml::$play-version"
   play-yaml: "com.play:play-yaml::$play-version"
-  common: [logback, junit, json, xml]
+  common: [logback, junit, json, xml, other]
+  other: [common]
 
 modules:
   - name: groucho
