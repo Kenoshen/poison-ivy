@@ -7,7 +7,7 @@ import scala.concurrent.Future
 object Clean extends TaskGroup[Unit] {
   override lazy val description: String = "Try to find the build file for parsing"
 
-  override def run(input: Unit): Future[Unit] = {
+  override protected def run(input: Unit): Future[Unit] = {
     val file = new File("build")
     if (file.exists) {
       // TODO: MW delete the directory

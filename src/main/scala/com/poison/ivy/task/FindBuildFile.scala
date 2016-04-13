@@ -7,7 +7,7 @@ import scala.concurrent.Future
 object FindBuildFile extends Task[Unit, File] {
   override lazy val description: String = "Try to find the build file for parsing"
 
-  override def run(input: Unit): Future[File] = {
+  override protected def run(input: Unit): Future[File] = {
     val file = File("poison.yml")
     if (file.exists)
       if (!file.isDirectory)

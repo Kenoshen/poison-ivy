@@ -10,7 +10,7 @@ class BuildDefinitionTest extends FunSuite {
   test("validate basic build definition"){
     val definition = BuildDefinition(
       BuildVariables(BuildVariable("version", "1.2.3"), BuildVariable("SECOND_PATH", "foobar$version")),
-      BuildLibraries(BuildLibrary("library", "yay"), BuildLibrary("lib", Seq("library"))),
+      BuildLibraries(Seq("first", "second"), BuildLibrary("library", "yay"), BuildLibrary("lib", Seq("library"))),
       BuildDefaults(group = Option("com.group"), description = Option("hello world"), dependencies = Seq("lib")),
       BuildModules(
         BuildModule(

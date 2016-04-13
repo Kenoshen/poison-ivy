@@ -1,7 +1,7 @@
 package com.poison.ivy.build
 
 import com.poison.ivy.task.TaskException
-import net.jcazevedo.moultingyaml.{YamlObject, YamlArray, YamlString, YamlValue}
+import net.jcazevedo.moultingyaml._
 
 case class BuildDefaults(
                         group: Option[String] = None,
@@ -10,8 +10,6 @@ case class BuildDefaults(
                         description: Option[String] = None,
                         dependencies: Seq[String] = Nil,
                         scala: Option[String] = None,
-                        source: Option[String] = None,
-                        target: Option[String] = None,
                         publishUrl: Option[String] = None,
                         publishRepoType: Option[String] = None,
                         publishCredentials: Option[String] = None
@@ -26,8 +24,6 @@ case class BuildDefaults(
     description.map(variables.populateTemplateString),
     dependencies.map(dep => if (libraries.get(dep).isEmpty) throw new TaskException(s"Defaults cannot reference a non-existent library ($dep)") else dep),
     scala.map(variables.populateTemplateString),
-    source.map(variables.populateTemplateString),
-    target.map(variables.populateTemplateString),
     publishUrl.map(variables.populateTemplateString),
     publishRepoType.map(variables.populateTemplateString),
     publishCredentials.map(variables.populateTemplateString)
@@ -38,6 +34,8 @@ case class BuildDefaults(
 object BuildDefaults {
   private def getString(key: String, fields: Map[YamlValue, YamlValue]):Option[String] = fields.get(YamlString(key)).map {
     case value:YamlString => value.value
+    case value:YamlNumber[Double] => value.prettyPrint
+    case value:YamlNumber[Long] => value.prettyPrint
     case x => throw new TaskException(s"Expected defaults.$key to be a string, instead found $x")
   }
 
@@ -62,8 +60,6 @@ object BuildDefaults {
         case x => throw new TaskException(s"Expected defaults.dependencies to be an array of strings, instead found $x")
       }.getOrElse(Nil),
       getString("scala", obj),
-      getString("source", obj),
-      getString("target", obj),
       publishObj.flatMap(p => getPublishString("url", p)),
       publishObj.flatMap(p => getPublishString("repoType", p)),
       publishObj.flatMap(p => getPublishString("credentials", p))

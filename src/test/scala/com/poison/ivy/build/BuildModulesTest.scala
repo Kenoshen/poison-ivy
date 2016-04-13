@@ -19,7 +19,7 @@ class BuildModulesTest extends FunSuite {
         "2.10",
         None
       )
-    ).scrub(BuildVariables(), BuildDefaults(), BuildLibraries())
+    ).scrub(BuildVariables(), BuildDefaults(), BuildLibraries(Seq("test")))
 
     assert(modules.modules.head.name == "test")
     assert(modules.modules.head.path == Option("test"))
@@ -38,7 +38,7 @@ class BuildModulesTest extends FunSuite {
         "2.10",
         None
       )
-    ).scrub(BuildVariables(BuildVariable("version", "1.2.3")), BuildDefaults(), BuildLibraries())
+    ).scrub(BuildVariables(BuildVariable("version", "1.2.3")), BuildDefaults(), BuildLibraries(Seq("test")))
 
     assert(modules.modules.head.version == "1.2.3")
   }
@@ -56,7 +56,7 @@ class BuildModulesTest extends FunSuite {
         None
       )
     )
-    intercept[TaskException](modules.scrub(BuildVariables(), BuildDefaults(), BuildLibraries()))
+    intercept[TaskException](modules.scrub(BuildVariables(), BuildDefaults(), BuildLibraries(Seq("test"))))
   }
 
   test("validate defaults in modules"){
@@ -71,7 +71,7 @@ class BuildModulesTest extends FunSuite {
         "2.10",
         None
       )
-    ).scrub(BuildVariables(), BuildDefaults(description = Option("default")), BuildLibraries())
+    ).scrub(BuildVariables(), BuildDefaults(description = Option("default")), BuildLibraries(Seq("test")))
 
     assert(modules.modules.head.description == Option("default"))
   }
@@ -88,7 +88,7 @@ class BuildModulesTest extends FunSuite {
         "2.10",
         None
       )
-    ).scrub(BuildVariables(), BuildDefaults(description = Option("default")), BuildLibraries())
+    ).scrub(BuildVariables(), BuildDefaults(description = Option("default")), BuildLibraries(Seq("test")))
 
     assert(modules.modules.head.description == Option("Hello world"))
   }
@@ -105,7 +105,7 @@ class BuildModulesTest extends FunSuite {
         "2.10",
         None
       )
-    ).scrub(BuildVariables(), BuildDefaults(), BuildLibraries(BuildLibrary("library", "libstring")))
+    ).scrub(BuildVariables(), BuildDefaults(), BuildLibraries(Seq("test"), BuildLibrary("library", "libstring")))
 
     assert(modules.modules.head.dependencies.head == "libstring")
   }
@@ -122,7 +122,7 @@ class BuildModulesTest extends FunSuite {
         "2.10",
         None
       )
-    ).scrub(BuildVariables(), BuildDefaults(), BuildLibraries(BuildLibrary("library", "libstring")))
+    ).scrub(BuildVariables(), BuildDefaults(), BuildLibraries(Seq("test"), BuildLibrary("library", "libstring")))
 
     assert(modules.modules.head.dependencies.head == "libstring")
     assert(modules.modules.head.dependencies.length == 1)
@@ -141,6 +141,6 @@ class BuildModulesTest extends FunSuite {
         None
       )
     )
-    intercept[TaskException](modules.scrub(BuildVariables(), BuildDefaults(), BuildLibraries()))
+    intercept[TaskException](modules.scrub(BuildVariables(), BuildDefaults(), BuildLibraries(Seq("test"))))
   }
 }

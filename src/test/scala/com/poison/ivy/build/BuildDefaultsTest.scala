@@ -15,12 +15,10 @@ class BuildDefaultsTest extends FunSuite {
       Option("description"),
       Seq("dependency"),
       Option("scalaversion"),
-      Option("source"),
-      Option("target"),
       Option("publishUrl"),
       Option("publishRepoType"),
       Option("publishCredentials")
-    ).scrub(BuildVariables(), BuildLibraries(BuildLibrary("dependency", "dep")))
+    ).scrub(BuildVariables(), BuildLibraries(Nil, BuildLibrary("dependency", "dep")))
   }
 
   test("fail on missing library"){
@@ -31,12 +29,10 @@ class BuildDefaultsTest extends FunSuite {
       Option("description"),
       Seq("dependency"),
       Option("scalaversion"),
-      Option("source"),
-      Option("target"),
       Option("publishUrl"),
       Option("publishRepoType"),
       Option("publishCredentials")
-    ).scrub(BuildVariables(), BuildLibraries()))
+    ).scrub(BuildVariables(), BuildLibraries(Nil)))
   }
 
   test("validate variables within defaults"){
@@ -47,12 +43,10 @@ class BuildDefaultsTest extends FunSuite {
       Option("description"),
       Seq("dependency"),
       Option("scalaversion"),
-      Option("source"),
-      Option("target"),
       Option("publishUrl"),
       Option("publishRepoType"),
       Option("publishCredentials")
-    ).scrub(BuildVariables(BuildVariable("version", "1.2.3")), BuildLibraries(BuildLibrary("dependency", "dep")))
+    ).scrub(BuildVariables(BuildVariable("version", "1.2.3")), BuildLibraries(Nil, BuildLibrary("dependency", "dep")))
 
     assert(defaults.version.get == "1.2.3")
   }
@@ -65,11 +59,9 @@ class BuildDefaultsTest extends FunSuite {
       Option("description"),
       Seq("dependency"),
       Option("scalaversion"),
-      Option("source"),
-      Option("target"),
       Option("publishUrl"),
       Option("publishRepoType"),
       Option("publishCredentials")
-    ).scrub(BuildVariables(), BuildLibraries()))
+    ).scrub(BuildVariables(), BuildLibraries(Nil)))
   }
 }

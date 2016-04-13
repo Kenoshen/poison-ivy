@@ -36,7 +36,7 @@ object BuildModules {
               case x => throw new TaskException(s"modules[$index].dependencies ($name) must be strings, instead got $x")
             }.toSeq ++ defaults.dependencies).flatMap(d => {
             val libs = libraries.get(d)
-            if (libs.isEmpty) throw new TaskException(s"$name at modules[$index].dependencies.$d did not exist as a library")
+            if (libs.isEmpty) throw new TaskException(s"the module ($name) at modules[$index] contains an unknown dependency ($d)")
             else libs
           }).distinct
           case x => throw new TaskException(s"modules[$index].dependencies ($name) must be an array of strings, instead got $x")
@@ -50,6 +50,7 @@ object BuildModules {
               getPublishString("repoType", publishFields, index, name).orElse(defaults.publishRepoType).map(variables.populateTemplateString).getOrElse(throw new TaskException(s"modules[$index].publish ($name) must have an associated 'repoType' field")),
               getPublishString("credentials", publishFields, index, name).orElse(defaults.publishCredentials).map(variables.populateTemplateString)
             )
+          case x => throw new TaskException(s"modules]$index].publish ($name) must be an object, instead found $x")
         }.orElse(if ((defaults.publishUrl orElse defaults.publishRepoType orElse defaults.publishCredentials).nonEmpty) Option(BuildPublish(defaults.publishUrl.getOrElse(""), defaults.publishRepoType.getOrElse(""), defaults.publishCredentials)) else None)
       ).scrub(variables, defaults, libraries)
   }.toSeq:_*)

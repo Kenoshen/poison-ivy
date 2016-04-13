@@ -3,7 +3,9 @@ package com.poison.ivy.build
 import com.poison.ivy.task.TaskException
 import net.jcazevedo.moultingyaml.{YamlArray, YamlValue, YamlString, YamlObject}
 
-case class BuildLibraries(libraries: BuildLibrary*){
+case class BuildLibraries(moduleNames: Seq[String], libraries: BuildLibrary*){
+  if (moduleNames.distinct.length != moduleNames.length) throw new TaskException(s"Module names must be unique, found duplicate module names (${moduleNames.diff(moduleNames.distinct).mkString(",")})")
+
   libraries.foreach(l => {
     get(l.name) // validate that no group references another group (avoids circular dependencies)
     if (l.isGroup){
@@ -13,24 +15,26 @@ case class BuildLibraries(libraries: BuildLibrary*){
     }
   })
 
-  def get(name:String):Seq[String] = libraries.find(_.name == name).map(bl => {
+  def get(name:String):Seq[String] = libraries.find(l => l.name == name || l.lib.orNull == name).map(bl => {
     if (bl.isGroup) bl.group.map(libName => subGet(libName, bl.name))
     else bl.group
-  }).getOrElse(Nil)
+  }).orElse(moduleNames.find(m => m == name || s"${BuildLibraries.MODULE_PREFIX}$m" == name).map(m => Seq(s"${BuildLibraries.MODULE_PREFIX}$m"))).getOrElse(Nil)
 
   private def subGet(name:String, groupName: String):String = libraries.find(_.name == name).flatMap(bl => {
     if (bl.isGroup) throw new TaskException(s"A library group ($groupName) cannot reference another library group ($name)")
     else bl.lib
-  }).getOrElse(throw new TaskException(s"A library group ($groupName) is referencing a library that does not exist ($name"))
+  }).orElse(moduleNames.find(m => m == name || s"${BuildLibraries.MODULE_PREFIX}$m" == name).map(m => s"${BuildLibraries.MODULE_PREFIX}$m")).getOrElse(throw new TaskException(s"A library group ($groupName) is referencing a library that does not exist ($name"))
 
-  def scrub(variables: BuildVariables): BuildLibraries = BuildLibraries(libraries.map(l => {
+  def scrub(variables: BuildVariables): BuildLibraries = BuildLibraries(moduleNames, libraries.map(l => {
     if (l.isGroup) l
     else BuildLibrary(l.name, variables.populateTemplateString(l.lib.getOrElse("")))
   }):_*)
 }
 
 object BuildLibraries {
-  def apply(yaml: YamlObject, variables: BuildVariables): BuildLibraries = BuildLibraries(yaml.fields.map {
+  protected final lazy val MODULE_PREFIX = "--internal:"
+
+  def apply(yaml: YamlObject, variables: BuildVariables, moduleNames: Seq[String]): BuildLibraries = BuildLibraries(moduleNames, yaml.fields.map {
     case (key: YamlString, lib: YamlString) => BuildLibrary(key.value, variables.populateTemplateString(lib.value))
     case (key: YamlString, group: YamlArray) => BuildLibrary(key.value, group.elements.map {
       case libName: YamlString => libName.value

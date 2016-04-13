@@ -14,5 +14,5 @@ trait Task[INCOMING, OUTGOING] extends Describable with Timeable {
     beginTiming
     try run(input) finally stopTiming
   }
-  def run(input: INCOMING):Future[OUTGOING]
+  protected def run(input: INCOMING):Future[OUTGOING]
 }

@@ -9,6 +9,8 @@ import net.jcazevedo.moultingyaml.{YamlString, YamlObject}
 
 import sys.process._
 
+import better.files._
+
 case class BuildVariables(variables: BuildVariable*){
   protected final val TEMPLATE_REGEX = """(\$\{(.*?)\})|(\$(.*?)[:"'|{}+=!@#$%^`~&*;,.<>?\/\\\[\]\(\)\n\s])|(\$(.*?)$)""".r
 
@@ -57,6 +59,8 @@ object BuildVariables {
 
     val epoch = BuildVariable("timestamp", s"${System.currentTimeMillis()}")
 
+    val userHome = BuildVariable("user-home", File("~").pathAsString)
+
     Seq(
       githash,
       githashLong,
@@ -64,7 +68,8 @@ object BuildVariables {
       shortDate,
       longDate,
       millisDate,
-      epoch
+      epoch,
+      userHome
     )
   }
 
