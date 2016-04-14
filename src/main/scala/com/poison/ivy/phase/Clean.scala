@@ -1,13 +1,16 @@
-package com.poison.ivy.task
+package com.poison.ivy.phase
 
 import java.io.File
 
-import scala.concurrent.Future
+import com.poison.ivy.flag.Flag
 
-object Clean extends TaskGroup[Unit] {
+import scala.concurrent.Future
+import scala.collection.mutable
+
+class Clean extends Phase {
   override lazy val description: String = "Try to find the build file for parsing"
 
-  override protected def run(input: Unit): Future[Unit] = {
+  override protected def run(input: mutable.Seq[Flag]): Future[Unit] = {
     val file = new File("build")
     if (file.exists) {
       // TODO: MW delete the directory

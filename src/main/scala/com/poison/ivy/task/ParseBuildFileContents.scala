@@ -4,7 +4,7 @@ import net.jcazevedo.moultingyaml._
 
 import scala.concurrent.Future
 
-object ParseBuildFileContents extends Task[String, YamlObject] {
+class ParseBuildFileContents extends Task[String, YamlObject] {
   override def description: String = "Parse the build file into a YAML object"
 
   override protected def run(input: String): Future[YamlObject] = try {

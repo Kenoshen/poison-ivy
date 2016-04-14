@@ -10,9 +10,14 @@ import scala.concurrent.Future
   * @tparam OUTGOING the output of the task
   */
 trait Task[INCOMING, OUTGOING] extends Describable with Timeable {
-  final def apply(input: INCOMING):Future[OUTGOING] = {
+  final def apply(input: INCOMING, debug: Boolean = false):Future[OUTGOING] = {
     beginTiming
-    try run(input) finally stopTiming
+    try run(input) finally {
+      stopTiming
+      if (debug) {
+        println(s"$name: $description ($timingAsDuration)")
+      }
+    }
   }
   protected def run(input: INCOMING):Future[OUTGOING]
 }

@@ -3,11 +3,13 @@ package com.poision.ivy.task
 import java.util.concurrent.TimeUnit
 
 import com.poison.ivy.build.BuildDefinition
+import com.poison.ivy.phase.Help
 import com.poison.ivy.task.{ParseBuildFileContents, ConvertYamlIntoBuildDefinition}
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
 
+import scala.collection.mutable
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
@@ -16,15 +18,20 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 @RunWith(classOf[JUnitRunner])
 class ConvertYamlIntoBuildDefinitionTest extends FunSuite {
+  test("help"){
+    val help = new Help()
+    Await.result(help(mutable.Seq(), debug=true), Duration(5, TimeUnit.SECONDS))
+  }
+
   test("parse the docs/poison.yml file into a build definition"){
     val definition:BuildDefinition = Await.result(for {
-      yamlObj <- ParseBuildFileContents(yamlBuildDefinition)
-      definition <- ConvertYamlIntoBuildDefinition(yamlObj)
+      yamlObj <- new ParseBuildFileContents()(yamlBuildDefinition)
+      definition <- new ConvertYamlIntoBuildDefinition()(yamlObj)
     } yield definition, Duration(5, TimeUnit.SECONDS))
 
     assert(definition.libraries.get("play-json").head == "com.play:play-json::2.3.3")
-
-    println(definition)
+    assert(definition.modules.modules.head.dependencies.head == "--internal:groucho-model")
+    assert(definition.modules.modules.last.path.get == "groucho-model")
   }
 
   val yamlBuildDefinition =
