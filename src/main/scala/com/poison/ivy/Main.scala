@@ -1,12 +1,17 @@
 package com.poison.ivy
 
+import com.poison.ivy.docs.{Describable, Timeable}
 import com.poison.ivy.flag.Flag
-import com.poison.ivy.phase.{Phase, Compile, Clean}
+import com.poison.ivy.phase.{Help, Phase, Compile, Clean}
 
-class Main extends App {
+object Main extends App with Timeable with Describable {
+  override lazy val description: String = args.mkString(" ")
+
+  beginTiming
 
   // I *could* make this sequence using reflection... but I don't want to...
   val availablePhases = Seq(
+    new Help(),
     new Clean(),
     new Compile()
   )
@@ -21,5 +26,22 @@ class Main extends App {
     flag.foreach(f => flags :+ f)
   })
 
-  phases.foreach(_(flags))
+  var failed = false
+  try {
+    if (phases.isEmpty) availablePhases.head(flags)
+    else phases.foreach(_(flags))
+  } catch {
+    case e: Exception =>
+      failed = true
+      throw e
+  } finally {
+    stopTiming
+    lastOutput(failed)
+  }
+
+
+  private def lastOutput(failed:Boolean) = println(s" ${
+    if (failed) s"${Console.RED}~failed: '$description'~"
+    else s"${Console.GREEN}~success: '$description'~${Console.WHITE}"
+  } took $timingAsDuration, finished at $endTimeAsPrettyString")
 }

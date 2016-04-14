@@ -11,7 +11,7 @@ class Compile extends Phase {
   override def description: String = "Compile all of the relevant source files"
 
   override protected def run(input: mutable.Seq[Flag]): Future[Unit] = for {
-    buildFile <- new FindBuildFile()(())
+    buildFile <- new FindBuildFile()()
     buildFileContents <- new ReadBuildFile()(buildFile)
     yamlConfigObject <- new ParseBuildFileContents()(buildFileContents)
   } yield "/location/of/newly/compiled/files"

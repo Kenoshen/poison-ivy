@@ -31,6 +31,7 @@ class TimerTaskTest extends FunSuite {
     Await.result(task(1000), Duration(5, TimeUnit.SECONDS))
     val totalTime = System.currentTimeMillis() - timeStart
 
-    assert(totalTime / 10 == task.timing / 10) // round down so that in case they are a few milliseconds off
+    assert(totalTime > task.timing - 10)
+    assert(totalTime < task.timing + 10)
   }
 }

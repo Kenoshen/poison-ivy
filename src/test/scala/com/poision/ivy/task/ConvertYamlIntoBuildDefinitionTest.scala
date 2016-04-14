@@ -18,11 +18,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 @RunWith(classOf[JUnitRunner])
 class ConvertYamlIntoBuildDefinitionTest extends FunSuite {
-  test("help"){
-    val help = new Help()
-    Await.result(help(mutable.Seq(), debug=true), Duration(5, TimeUnit.SECONDS))
-  }
-
   test("parse the docs/poison.yml file into a build definition"){
     val definition:BuildDefinition = Await.result(for {
       yamlObj <- new ParseBuildFileContents()(yamlBuildDefinition)
