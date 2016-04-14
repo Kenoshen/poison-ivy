@@ -1,7 +1,8 @@
-**.idea
+**/.idea
 **.iml
 **.project
 **.classpath
 **.DS_Store
-**build
-**target
+/build
+/target
+/project

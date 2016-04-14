@@ -5,7 +5,7 @@ variables:
 
 defaults:
   group: com.twc.groucho
-  version: $githash-$date
+  version: ${githash}-$date
   package: jar
   publish:
     type: mvn
